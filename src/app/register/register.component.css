@@ -1,0 +1,36 @@
+.register-form {
+    max-width: 500px;
+    margin: auto;
+}
+
+h2 {
+    text-align: center;
+    margin: 10px;
+}
+
+p {
+    text-align: center;
+}
+
+.warning-text {
+    color: red;
+    font-style: italic;
+}
+
+.name-left {
+    width: calc(50% - 5px);
+    margin: 0 5px 0 0;
+}
+
+.name-right {
+    width: calc(50% - 5px);
+    margin: 0 0 0 5px;
+}
+
+.full {
+    width: 100%;
+}
+
+a {
+    text-align: center;
+}

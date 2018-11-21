@@ -1,0 +1,22 @@
+h2 {
+    text-align: center;
+}
+
+.input-field {
+    width: 100%
+}
+
+.login-form {
+    width: 300px;
+    margin: auto;
+}
+
+.bottom-links {
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+.login-button {
+    width: 100%;
+    margin-bottom: 10px;
+}
