@@ -1,13 +1,17 @@
 <div class="register-form">
   <form [formGroup]='registerForm'>
     <h2>Register</h2>
-    <p class="warning-text">You should only register if you are a member of the Waverly Robotics Team</p>
+    <p class="warning-text">{{message}}</p>
     <mat-form-field class="full" appearance="outline">
       <mat-label>Email</mat-label>
       <input matInput placeholder="Email" formControlName="email" type="email" required>
-      <mat-error>
+      <mat-hint *ngIf='registerForm.pending'>Checking Email...</mat-hint>
+      <mat-error *ngIf='registerForm.controls.email.hasError("required")'>
         Please enter a valid email
       </mat-error>
+      <mat-error *ngIf='registerForm.controls.email.hasError("emailTaken")'>
+          Email already in use!
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field class="name-left" appearance="outline">
@@ -23,7 +27,7 @@
     <mat-form-field class="full" appearance="outline">
       <mat-label>Password</mat-label>
       <input matInput placeholder="Password" formControlName="password" type="password" required>
-      <mat-error *ngIf="registerForm.hasError('required', 'password')">
+      <mat-error *ngIf="registerForm.hasError('minlength', 'password')">
         Password must be at least 8 characters long
       </mat-error>
     </mat-form-field>
@@ -32,12 +36,12 @@
       <mat-label>Confirm Password</mat-label>
       <input matInput placeholder="Confirm Password" formControlName="passwordConfirm" type="password"
         [errorStateMatcher]="passwordConfirmMatcher">
-      <mat-error>
+      <mat-error *ngIf='registerForm.hasError("mismatch")'>
         Passwords do not match
       </mat-error>
     </mat-form-field>
-
-    <button [disabled]='registerForm.invalid' mat-raised-button color="primary" (click)='submit()' class="full">Create Account</button>
+    <!--[disabled]='!registerForm.valid'-->
+    <button mat-raised-button color="primary" (click)='submit()' class="full">Create Account</button>
     <p>
       <a [routerLink]="['/']">Already have an account? Log in</a>
     </p>

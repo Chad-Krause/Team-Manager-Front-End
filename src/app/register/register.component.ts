@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, ValidatorFn, AsyncValidatorFn, AbstractControl } from '@angular/forms';
 import { FormErrorStateMatcher } from '../directives/form-error-state-matcher';
 import { ApiService } from '../services/api.service';
+import { AsyncEmailValidator } from '../directives/async-email-validator.directive';
+import { UserRegistration } from '../models/user';
 
 @Component({
   selector: 'app-register',
@@ -11,18 +13,22 @@ import { ApiService } from '../services/api.service';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-
+  message: string = 'You should only register if you are a member of the Waverly Robotics Team';
   passwordConfirmMatcher = new FormErrorStateMatcher();
+  success: string = 'Registration successful. Please wait until an admin confirms you.'
 
-  constructor(private api: ApiService) {
+  constructor(
+    private api: ApiService,
+    private asyncEmailValidator: AsyncEmailValidator
+    ) {
   }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
-      'email': new FormControl('', [
+      'email': new FormControl('', {validators: [
         Validators.email,
         Validators.required
-      ]),
+      ], asyncValidators: this.asyncEmailValidator.validate.bind(this.asyncEmailValidator)}),
       'first': new FormControl('', [
         Validators.required
       ]),
@@ -43,17 +49,17 @@ export class RegisterComponent implements OnInit {
   passwordMatchValidator(group: FormGroup) { // here we have the 'passwords' group
     let pass = group.controls.password.value;
     let confirmPass = group.controls.passwordConfirm.value;
-    return pass == confirmPass ? null : { notSame: true }
-  }
-
-  asyncEmailValidator() {
-    this.api.checkEmail('test').subscribe(
-      valid => valid.data.exists
-    )
+    return pass == confirmPass ? null : { mismatch: true }
   }
 
   submit() {
-    console.log("Valid?: ", this.registerForm.valid);
+    if(!this.registerForm.valid) {
+      return;
+    }
+
+    this.api.registerUser(new UserRegistration(this.registerForm.value)).subscribe(
+      response => this.message = response.success ? this.success : response.errors[0].title
+    )
   }
 }
 

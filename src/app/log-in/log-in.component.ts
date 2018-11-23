@@ -1,4 +1,5 @@
 import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,10 +8,19 @@ import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 })
 export class LoginPageComponent {
 
+  loginForm: FormGroup = new FormGroup({
+    'email': new FormControl('', [Validators.required, Validators.email]),
+    'password': new FormControl('', [Validators.required])
+  });
+
   constructor() {
-   }
-  
+  }
+
   ngAfterViewInit(): void {
+  }
+
+  login() {
+    
   }
 
 }

@@ -1,6 +1,7 @@
 import { ApiError } from "./api-error";
 
-export class API<T> {
+export class ApiResponse<T> {
     errors?: ApiError[];
     data?: T;
+    success?: boolean;
 }

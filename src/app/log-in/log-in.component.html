@@ -2,20 +2,21 @@
 
 <div class="login-form">
     <h2>Login</h2>
-    <mat-form-field class="input-field" appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="Email" type="email">
-    </mat-form-field>
+    <form [formGroup]='loginForm'>
+        <mat-form-field class="input-field" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" type="email">
+        </mat-form-field>
 
-    <mat-form-field class="input-field" appearance="outline">
-        <mat-label>Password</mat-label>
-        <input matInput placeholder="Password" type="password">
-    </mat-form-field>
+        <mat-form-field class="input-field" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" type="password">
+        </mat-form-field>
 
-    <button mat-raised-button color="primary" class="login-button">Login</button>
-
+        <button mat-raised-button color="primary" (class)='login()' class="login-button">Login</button>
+    </form>
     <p class="bottom-links">
-        <a [routerLink]="['forgotpassword']">Forgot Password</a>
+        <a [routerLink]="['forgotPassword']">Forgot Password</a>
     </p>
     <p class="bottom-links">
         <a [routerLink]="['register']">Register</a>
