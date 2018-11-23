@@ -5,18 +5,18 @@
     <form [formGroup]='loginForm'>
         <mat-form-field class="input-field" appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" type="email">
+            <input matInput placeholder="Email" formControlName='email' type="email">
         </mat-form-field>
 
         <mat-form-field class="input-field" appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" type="password">
+            <input matInput placeholder="Password" formControlName='password' type="password">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" (class)='login()' class="login-button">Login</button>
+        <button mat-raised-button color="primary" (click)='login()' class="login-button">Login</button>
     </form>
     <p class="bottom-links">
-        <a [routerLink]="['forgotPassword']">Forgot Password</a>
+        <a [routerLink]="['forgot-password']">Forgot Password</a>
     </p>
     <p class="bottom-links">
         <a [routerLink]="['register']">Register</a>

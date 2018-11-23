@@ -1,5 +1,6 @@
 import { Component, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -13,14 +14,16 @@ export class LoginPageComponent {
     'password': new FormControl('', [Validators.required])
   });
 
-  constructor() {
+  constructor(
+    private auth: AuthService
+  ) {
   }
 
   ngAfterViewInit(): void {
   }
 
   login() {
-    
+    this.auth.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
   }
 
 }

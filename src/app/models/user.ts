@@ -1,4 +1,27 @@
 export class User {
+    id: number;
+    firstName: string;
+    lastName: string;
+    nickname: string;
+    email: string;
+    role: number;
+    birthday: Date;
+    graduationYear: number;
+    yearJoined: number;
+    confirmed: boolean;
+
+    constructor(response: any) {
+        this.id = +response.id;
+        this.firstName = response.firstName;
+        this.lastName = response.lastName;
+        this.nickname = response.nickname;
+        this.email = response.email;
+        this.role = +response.role;
+        this.birthday = new Date(response.birthday);
+        this.graduationYear = +response.graduationYear;
+        this.yearJoined = +response.yearJoined;
+        this.confirmed = response.confirmed;
+    }
 }
 
 export class UserRegistration {

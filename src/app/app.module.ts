@@ -19,9 +19,11 @@ import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { PasswordMatchValidator } from './directives/password-match.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AsyncEmailValidatorDirective } from './directives/async-email-validator.directive';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { TokenInterceptor } from './services/token-interceptor.service';
+import { AccountInfoComponent } from './account-info/account-info.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
     RegisterComponent,
     ForgotPasswordComponent,
     AsyncEmailValidatorDirective,
-    PasswordResetComponent
+    PasswordResetComponent,
+    AccountInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +51,7 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

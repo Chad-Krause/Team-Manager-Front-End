@@ -4,12 +4,14 @@ import { LoginPageComponent } from './log-in/log-in.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { AccountInfoComponent } from './account-info/account-info.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
-  { path: 'forgotPassword', component: ForgotPasswordComponent },
-  { path: 'resetPassword', component: PasswordResetComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: PasswordResetComponent },
   { path: 'login', component: LoginPageComponent },
+  { path: 'account-info', component: AccountInfoComponent},
   { path: '**', component: LoginPageComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' }
 ];

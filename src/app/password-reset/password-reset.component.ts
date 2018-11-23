@@ -50,7 +50,7 @@ export class PasswordResetComponent implements OnInit {
       return;
     }
 
-    this.api.resetPasswordWithValidator(this.passwordForm.controls.password.value, this.passwordForm.controls.confirmPassword.value, this.validator).subscribe(
+    this.api.resetPasswordWithValidator(this.passwordForm.controls.password.value, this.passwordForm.controls.passwordConfirm.value, this.validator).subscribe(
       response => {
         if(!response.success) {
           this.message = response.errors[0].title;
