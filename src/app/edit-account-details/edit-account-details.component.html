@@ -1,0 +1,42 @@
+<div>
+  <h2>Edit Information</h2>
+  <img class='profile-image' src='{{ user.getProfilePicture() | secure | async }}'>
+  <button mat-raised-button>Upload new image</button>
+
+  <p class="warning-text">{{message}}</p>
+  <form [formGroup]='editForm' class="edit-form">
+    <mat-form-field class="full" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Email" formControlName="email" type="email">
+    </mat-form-field>
+
+    <mat-form-field class="full" appearance="outline">
+      <mat-label>Nickname</mat-label>
+      <input matInput placeholder="Nickname" formControlName="nickname">
+    </mat-form-field>
+
+    <mat-form-field class="name-left" appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="First" formControlName="first" required>
+    </mat-form-field>
+
+    <mat-form-field class="name-right" appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Last" formControlName="last" required>
+    </mat-form-field>
+
+    <mat-form-field class="name-left" appearance="outline">
+      <mat-label>Year Joined</mat-label>
+      <input matInput placeholder="Last" formControlName="yearJoined" required>
+    </mat-form-field>
+
+    <mat-form-field class="name-right" appearance="outline">
+      <mat-label>Graduation Year</mat-label>
+      <input matInput placeholder="Last" formControlName="graduation" required>
+    </mat-form-field>
+  </form>
+  <div class="action-button-container">
+    <button mat-raised-button (click)='cancel()' class="submit-button">Cancel</button>
+    <button mat-raised-button color="primary" (click)='submit()' class="submit-button">Save</button>
+  </div>
+</div>

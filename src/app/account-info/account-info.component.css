@@ -1,0 +1,44 @@
+.account-details {
+    text-align: center;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px auto;
+}
+
+
+
+.name {
+    text-align: center;
+    font-size: 30px;
+}
+
+.details {
+    padding-top: 0;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    background: white;
+}
+
+.key {
+    width: 30%;
+    margin-right: 10px;
+    border-right: 1px solid;
+    border-right-color: rgba(0,0,0,.12);
+    height: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.key p {
+    position: relative;
+    top: 50%;
+    font-weight: bold;
+    transform: perspective(1px) translateY(-50%);
+}
+
+.value {
+    width: calc(70%-10px);
+    text-align: end;
+}

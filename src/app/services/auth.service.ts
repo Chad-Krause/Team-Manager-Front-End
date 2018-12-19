@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 import { globals } from 'src/environments/globals';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class AuthService {
   }
 
   getUser(): User {
-    return JSON.parse(localStorage.getItem(globals.LS_USER)) as User;
+    return new User(JSON.parse(localStorage.getItem(globals.LS_USER)));
   }
 
   logout(): void {
@@ -37,5 +38,20 @@ export class AuthService {
 
   getJWT(): string {
     return localStorage.getItem(globals.LS_JWT);
+  }
+
+  isLoggedIn(): boolean {
+    const helper = new JwtHelperService();
+    const encodedToken = this.getJWT();
+
+    if(encodedToken == undefined) {
+      return false;
+    }
+
+    const decodedToken = helper.decodeToken(encodedToken);
+
+    const expiry = new Date(decodedToken.exp);
+    const now = Date.now() / 1000;
+    return expiry.getTime() > now;
   }
 }

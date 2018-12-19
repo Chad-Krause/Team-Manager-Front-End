@@ -8,7 +8,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatButtonModule } from "@angular/material/button";
-import { MatRippleModule, MatInputModule } from '@angular/material';
+import { MatRippleModule, MatInputModule, MatDividerModule } from '@angular/material';
 
 import 'hammerjs'
 
@@ -24,6 +24,8 @@ import { AsyncEmailValidatorDirective } from './directives/async-email-validator
 import { PasswordResetComponent } from './password-reset/password-reset.component';
 import { TokenInterceptor } from './services/token-interceptor.service';
 import { AccountInfoComponent } from './account-info/account-info.component';
+import { EditAccountDetailsComponent } from './edit-account-details/edit-account-details.component';
+import { SecurePipe } from './pipes/secure.pipe';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AccountInfoComponent } from './account-info/account-info.component';
     ForgotPasswordComponent,
     AsyncEmailValidatorDirective,
     PasswordResetComponent,
-    AccountInfoComponent
+    AccountInfoComponent,
+    EditAccountDetailsComponent,
+    SecurePipe
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,7 @@ import { AccountInfoComponent } from './account-info/account-info.component';
     MatButtonModule,
     MatRippleModule,
     MatInputModule,
+    MatDividerModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

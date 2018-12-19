@@ -20,7 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
     let authdReq: HttpRequest<any>;
 
     if(jwt) {
-      authdReq = req.clone({headers: req.headers.set('Authentication', `Bearer ${jwt}`)});
+      authdReq = req.clone({headers: req.headers.set('Authorization', `Bearer ${jwt}`)});
     } else {
       authdReq = req;
     }

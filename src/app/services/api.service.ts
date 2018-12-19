@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api';
 import { EmailCheck } from '../models/email-check';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { UserRegistration, UserRegistrationResponse, UserLoginResponse } from '../models/user';
+import { UserRegistration, UserRegistrationResponse, UserLoginResponse, HoursLogged, User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -31,5 +31,20 @@ export class ApiService {
 
   login(email: string, password: string) : Observable<ApiResponse<UserLoginResponse>> {
     return this.http.post<ApiResponse<UserLoginResponse>>(environment.baseUrl + 'user/login', {email, password});
+  }
+
+  getTotalHoursLogged(userid: number, date: Date = null) : Observable<ApiResponse<any>> {
+    let params = {};
+    if(date != null){
+      params = params = {userid: userid.toString(), date: date.toISOString().substr(0,10)};
+    } else {
+      params = {userid: userid.toString()};
+    }
+
+    return this.http.get<ApiResponse<HoursLogged>>(environment.baseUrl + 'punch/hoursLogged', { params: params });
+  }
+
+  getUser(id: number): Observable<ApiResponse<User>> {
+    return this.http.get<ApiResponse<User>>(environment.baseUrl + 'user/get', {params: {id: id.toString()}});
   }
 }

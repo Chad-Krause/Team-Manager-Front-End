@@ -9,6 +9,7 @@ export class User {
     graduationYear: number;
     yearJoined: number;
     confirmed: boolean;
+    profilePictureUrl: string;
 
     constructor(response: any) {
         this.id = +response.id;
@@ -21,6 +22,37 @@ export class User {
         this.graduationYear = +response.graduationYear;
         this.yearJoined = +response.yearJoined;
         this.confirmed = response.confirmed;
+        this.profilePictureUrl = response.profilePictureUrl;
+    }
+
+    getName(): string {
+        return this.nickname !== null ? this.nickname : `${this.firstName} ${this.lastName}`;
+    }
+
+    getProfilePicture(): string {
+        return this.profilePictureUrl ? this.profilePictureUrl : 'assets/missing_profile.png'
+    }
+
+    getRole(): string {
+        let role = '';
+        switch (this.role) {
+            case 1:
+                role = 'Admin';
+                break;
+            case 2:
+                role = 'Student';
+                break;
+            case 3:
+                role = 'Mentor'
+                break;
+            case 4:
+                role = 'Guardian';
+                break;
+            default:
+                role = 'Unknown... Probably should be fixed';
+        }
+
+        return role;
     }
 }
 
@@ -52,4 +84,14 @@ export class UserLogin {
 export class UserLoginResponse {
     token: string;
     user: User;
+}
+
+export class HoursLogged {
+    userid: number;
+    totalTimeLogged: string;
+
+    constructor(response: any) {
+        this.userid = +response.userid;
+        this.totalTimeLogged = response.totalTimeLogged;
+    }
 }

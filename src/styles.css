@@ -13,3 +13,13 @@ body {
 .menu-spacer {
     flex: 1 1 auto;
 }
+
+.profile-image {
+    border-radius: 50%;
+    display: block;
+    margin: auto !important;
+    width: 50% !important;
+    height: 50%;
+    max-height: 200px;
+    max-width: 200px;
+}
