@@ -39,6 +39,15 @@
 }
 
 .value {
-    width: calc(70%-10px);
+    width: 70%;
     text-align: end;
+    max-height: 40px;
+    overflow: scroll;
+}
+
+.tidbit {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 20px;
 }

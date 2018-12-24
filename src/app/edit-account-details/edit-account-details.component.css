@@ -3,21 +3,22 @@ h2 {
     text-align:  center;
 }
 .edit-form {
+    padding: 10px;
+}
+
+.card {
     max-width: 500px;
     margin: auto;
     box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
     background: white;
-    padding: 10px;
+    border-radius:2px;
 }
 
 p {
     text-align: center;
 }
 
-.warning-text {
-    color: red;
-    font-style: italic;
-}
+
 
 .name-left {
     width: calc(50% - 5px);
@@ -52,4 +53,60 @@ button {
 .action-button-container {
     margin: auto;
     max-width: 440px;
+}
+
+table {
+    width: 100%;
+}
+
+td.mat-column-menu {
+    width: 10px;
+    padding-right: 5
+}
+
+td.mat-column-name {
+    padding-right: 10px;
+    /*border-right: solid rgba(0,0,0,.12) 1px;*/
+}
+td.mat-column-value {
+    padding-left: 10px;
+}
+
+th.mat-column-value {
+    padding-left: 10px;
+}
+td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type {
+    padding-right: 10px;
+}
+
+
+th {
+    font-size: 16px;
+}
+
+
+.mat-menu-item {
+    text-align: left;
+}
+
+.add-tidbit-button {
+    float: right;
+}
+
+.tidbit-title {
+    margin-top: 20px;
+}
+
+.tidbit-table {
+    padding: 5px;
+}
+
+.context-menu-text {
+    border-bottom: 1px solid gray;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+}
+
+.no-margin-bottom {
+    margin-bottom: 5px;
 }

@@ -1,0 +1,39 @@
+.operation-description {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+}
+
+.tidbit-form-field {
+    width: 100%;
+}
+
+.addTidbitName {
+    margin: 5px;
+    text-align: center;
+    font-size: 2em;
+}
+
+.addTidbitDescription {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.action {
+    width: 40%;
+    height: 35px;
+    font-size: 16px;
+    margin: auto;
+}
+
+
+.action-buttons {
+    padding-bottom: 1em;
+}
+
+.delete {
+    text-align: center;
+}

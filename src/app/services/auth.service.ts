@@ -54,4 +54,8 @@ export class AuthService {
     const now = Date.now() / 1000;
     return expiry.getTime() > now;
   }
+
+  setUser(user: User) {
+    localStorage.setItem(globals.LS_USER, JSON.stringify(user));
+  }
 }

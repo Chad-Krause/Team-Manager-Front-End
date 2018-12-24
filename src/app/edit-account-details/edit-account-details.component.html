@@ -1,10 +1,13 @@
-<div>
+<div *ngIf='user'>
   <h2>Edit Information</h2>
-  <img class='profile-image' src='{{ user.getProfilePicture() | secure | async }}'>
-  <button mat-raised-button>Upload new image</button>
+  <img class='profile-image' src='{{ imgUrl | secure | async }}'>
+  <p class='warning-text no-margin-bottom'>{{imgMessage}}</p>
+  <button mat-raised-button color='primary' class='edit-picture-button' (click)='uploadImageButton()'><mat-icon>add_photo_alternate</mat-icon>Upload new image</button>
+  <input hidden type="file" id="file" #file (change)="onFileSelect($event.target.files)" accept='image/*'>
+  <mat-progress-bar *ngIf='progress != 100' class='card' mode="determinate" [value]="progress"></mat-progress-bar>
 
   <p class="warning-text">{{message}}</p>
-  <form [formGroup]='editForm' class="edit-form">
+  <form [formGroup]='editForm' class="edit-form card">
     <mat-form-field class="full" appearance="outline">
       <mat-label>Email</mat-label>
       <input matInput placeholder="Email" formControlName="email" type="email">
@@ -34,9 +37,78 @@
       <mat-label>Graduation Year</mat-label>
       <input matInput placeholder="Last" formControlName="graduation" required>
     </mat-form-field>
+    <mat-form-field class="name-left" appearance="outline">
+      <mat-label>Birthday</mat-label>
+      <input matInput [matDatepicker]="picker" placeholder="Birthday" formControlName="birthday" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="name-right" appearance="outline">
+      <mat-label>Account Type</mat-label>
+      <mat-select formControlName='roleid'>
+        <mat-option *ngFor="let role of account_roles" [value]="role.id">
+          {{role.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </form>
   <div class="action-button-container">
     <button mat-raised-button (click)='cancel()' class="submit-button">Cancel</button>
-    <button mat-raised-button color="primary" (click)='submit()' class="submit-button">Save</button>
+    <button mat-raised-button color="primary" (click)='save()' class="submit-button">Save</button>
+  </div>
+
+
+  <div *ngIf='user'>
+    <h2 class='tidbit-title'>Tidbits</h2>
+    <p class='warning-text'>{{tidbitMsg}}</p>
+    <div class='tidbit-table card'>
+      <table *ngIf='setupFinished' mat-table [dataSource]='tidbits'>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Tidbit</th>
+          <td mat-cell *matCellDef="let tidbit"> {{tidbit.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef>Value</th>
+          <td mat-cell *matCellDef="let tidbit"> {{tidbit.value}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="add">
+          <td mat-footer-cell *matFooterCellDef colspan="3">
+            <button mat-raised-button color='primary' (click)='addTidbit()' class='add-tidbit-button'>
+              <mat-icon>add</mat-icon>Add Tidbit
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="menu" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let tidbit">
+            <button mat-icon-button [matMenuTriggerFor]="contextMenu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #contextMenu="matMenu">
+              <p class='context-menu-text'>
+                {{tidbit.name}}
+              </p>
+              <button mat-menu-item (click)='editTidbit(tidbit.tidbittypeid)'>
+                <mat-icon>edit</mat-icon>Edit
+              </button>
+              <button mat-menu-item (click)='deleteTidbit(tidbit.tidbittypeid)'>
+                <mat-icon>delete</mat-icon>Delete
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['name', 'value', 'menu']"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: ['name', 'value', 'menu']"></tr>
+        <tr mat-footer-row [hidden]='!tidbitsAvailable' *matFooterRowDef="['add']" class=""></tr>
+      </table>
+
+    </div>
   </div>
 </div>
+<mat-spinner class='spinner' *ngIf='!user'></mat-spinner>

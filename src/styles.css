@@ -15,11 +15,32 @@ body {
 }
 
 .profile-image {
-    border-radius: 50%;
+    border-radius: 20px;
     display: block;
     margin: auto !important;
     width: 50% !important;
     height: 50%;
     max-height: 200px;
     max-width: 200px;
+}
+
+.spinner {
+    margin: 0 auto;
+}
+
+.warning-text {
+    color: red;
+    font-style: italic;
+}
+
+.warning-text-modal {
+    color: red;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.green {
+    background: #28a745;
+    color: white;
 }

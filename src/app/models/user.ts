@@ -5,8 +5,8 @@ export class User {
     nickname: string;
     email: string;
     role: number;
-    birthday: Date;
-    graduationYear: number;
+    birthday: Date | null;
+    graduationYear: number | null;
     yearJoined: number;
     confirmed: boolean;
     profilePictureUrl: string;
@@ -18,15 +18,15 @@ export class User {
         this.nickname = response.nickname;
         this.email = response.email;
         this.role = +response.role;
-        this.birthday = new Date(response.birthday);
-        this.graduationYear = +response.graduationYear;
+        this.birthday = response.birthday ? new Date(response.birthday) : null;
+        this.graduationYear = response.graduationYear ? +response.graduationYear : null;
         this.yearJoined = +response.yearJoined;
         this.confirmed = response.confirmed;
         this.profilePictureUrl = response.profilePictureUrl;
     }
 
     getName(): string {
-        return this.nickname !== null ? this.nickname : `${this.firstName} ${this.lastName}`;
+        return (this.nickname !== null) && (this.nickname.length > 1) ? this.nickname : `${this.firstName} ${this.lastName}`;
     }
 
     getProfilePicture(): string {
@@ -95,3 +95,10 @@ export class HoursLogged {
         this.totalTimeLogged = response.totalTimeLogged;
     }
 }
+
+export const ACCOUNT_ROLES = [
+    {id: 1, name: 'Admin'},
+    {id: 2, name: 'Student'},
+    {id: 3, name: 'Mentor'},
+    {id: 4, name: 'Guardian'}
+]

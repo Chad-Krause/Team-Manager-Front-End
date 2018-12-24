@@ -8,7 +8,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatButtonModule } from "@angular/material/button";
-import { MatRippleModule, MatInputModule, MatDividerModule } from '@angular/material';
+import { MatRippleModule, MatInputModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatOptionModule, MatSelectModule, MatTableModule, MatMenuModule, MatProgressBarModule } from '@angular/material';
 
 import 'hammerjs'
 
@@ -26,6 +26,9 @@ import { TokenInterceptor } from './services/token-interceptor.service';
 import { AccountInfoComponent } from './account-info/account-info.component';
 import { EditAccountDetailsComponent } from './edit-account-details/edit-account-details.component';
 import { SecurePipe } from './pipes/secure.pipe';
+import { ActivatedRouteSnapshot } from '@angular/router';
+import { TidbitDialogComponent } from './modals/tidbit-dialog/tidbit-dialog.component';
+import { SafeHtmlPipe } from './directives/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { SecurePipe } from './pipes/secure.pipe';
     PasswordResetComponent,
     AccountInfoComponent,
     EditAccountDetailsComponent,
-    SecurePipe
+    SecurePipe,
+    TidbitDialogComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -51,12 +56,28 @@ import { SecurePipe } from './pipes/secure.pipe';
     MatRippleModule,
     MatInputModule,
     MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatProgressSpinnerModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTableModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatProgressBarModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}],
+  providers: [
+    MatNativeDateModule,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
+  ],
+  entryComponents: [
+    TidbitDialogComponent,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

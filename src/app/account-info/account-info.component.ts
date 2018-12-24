@@ -3,6 +3,8 @@ import { User } from '../models/user';
 import { AuthService } from '../services/auth.service';
 import { formatDate } from '@angular/common';
 import { ApiService } from '../services/api.service';
+import { Observable } from 'rxjs';
+import { Tidbit } from '../models/tidbit';
 
 @Component({
   selector: 'app-account-info',
@@ -13,30 +15,40 @@ export class AccountInfoComponent implements OnInit {
 
   user: User;
   hours: string;
+  id: number;
+  details: {key: string, value}[];
+  tidbits: Tidbit[] = [];
 
   constructor(
     private auth: AuthService,
     private api: ApiService
-  ) { }
+  ) { 
+    this.id = this.auth.getUser().id;
+    this.api.getUser(this.id).subscribe(
+      accountDetails => {
+        this.user = new User(accountDetails.data.user);
+        this.tidbits = accountDetails.data.tidbits;
+        this.hours = accountDetails.data.totalHoursLogged.totalTimeLogged;
+        this.getDetails();
+      }
+    )
+  }
 
   ngOnInit() {
-    this.user = this.auth.getUser();
-    this.api.getTotalHoursLogged(this.user.id, null).subscribe(
-      res => this.hours = this.formatHoursLoggedTime(res.data.totalTimeLogged)
-    );
+    
   }
 
   getDetails() {
     let u = this.user;
-    return [
+    this.details = [
       {key: 'Name', value: `${u.firstName} ${u.lastName}`},
       {key: 'Nickname', value: u.nickname},
       {key: 'Email', value: u.email},
       {key: 'Account Type', value: u.getRole()},
-      {key: 'Birthday', value: formatDate(u.birthday, 'longDate', 'en', 'utc')},
+      {key: 'Birthday', value: u.birthday ? formatDate(u.birthday, 'longDate', 'en', 'utc') : ''},
       {key: 'Year Joined', value: u.yearJoined},
       {key: 'Graduation Year', value: u.graduationYear},
-      {key: 'Total Time Logged', value: this.hours}
+      {key: 'Total Time Logged', value: this.formatHoursLoggedTime(this.hours)}
     ]
   }
 
