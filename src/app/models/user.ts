@@ -7,7 +7,7 @@ export class User {
     role: number;
     birthday: Date | null;
     graduationYear: number | null;
-    yearJoined: number;
+    yearJoined: number | null;
     confirmed: boolean;
     profilePictureUrl: string;
 
@@ -20,7 +20,7 @@ export class User {
         this.role = +response.role;
         this.birthday = response.birthday ? new Date(response.birthday) : null;
         this.graduationYear = response.graduationYear ? +response.graduationYear : null;
-        this.yearJoined = +response.yearJoined;
+        this.yearJoined = response.yearJoined ? +response.yearJoined : null;
         this.confirmed = response.confirmed;
         this.profilePictureUrl = response.profilePictureUrl;
     }
@@ -102,3 +102,10 @@ export const ACCOUNT_ROLES = [
     {id: 3, name: 'Mentor'},
     {id: 4, name: 'Guardian'}
 ]
+
+export enum Roles {
+    ADMIN = 1,
+    STUDENT = 2,
+    MENTOR = 3,
+    GUARDIAN = 4
+}

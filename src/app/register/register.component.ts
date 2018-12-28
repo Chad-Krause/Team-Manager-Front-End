@@ -15,20 +15,23 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   message: string = 'You should only register if you are a member of the Waverly Robotics Team';
   passwordConfirmMatcher = new FormErrorStateMatcher();
+  successfulRegistration: boolean = false;
   success: string = 'Registration successful. Please wait until an admin confirms you.'
 
   constructor(
     private api: ApiService,
     private asyncEmailValidator: AsyncEmailValidator
-    ) {
+  ) {
   }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
-      'email': new FormControl('', {validators: [
-        Validators.email,
-        Validators.required
-      ], asyncValidators: this.asyncEmailValidator.validate.bind(this.asyncEmailValidator)}),
+      'email': new FormControl('', {
+        validators: [
+          Validators.email,
+          Validators.required
+        ], asyncValidators: this.asyncEmailValidator.validate.bind(this.asyncEmailValidator)
+      }),
       'first': new FormControl('', [
         Validators.required
       ]),
@@ -53,12 +56,15 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    if(!this.registerForm.valid) {
+    if (!this.registerForm.valid) {
       return;
     }
 
     this.api.registerUser(new UserRegistration(this.registerForm.value)).subscribe(
-      response => this.message = response.success ? this.success : response.errors[0].title
+      response => {
+        this.message = response.success ? this.success : response.errors[0].title;
+        this.successfulRegistration = response.success;
+      }
     )
   }
 }

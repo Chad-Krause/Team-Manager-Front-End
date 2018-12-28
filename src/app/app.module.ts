@@ -29,6 +29,7 @@ import { SecurePipe } from './pipes/secure.pipe';
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { TidbitDialogComponent } from './modals/tidbit-dialog/tidbit-dialog.component';
 import { SafeHtmlPipe } from './directives/safe-html.pipe';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SafeHtmlPipe } from './directives/safe-html.pipe';
     EditAccountDetailsComponent,
     SecurePipe,
     TidbitDialogComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

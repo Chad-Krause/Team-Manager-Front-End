@@ -15,7 +15,7 @@
 
     <mat-form-field class="full" appearance="outline">
       <mat-label>Nickname</mat-label>
-      <input matInput placeholder="Nickname" formControlName="nickname">
+      <input matInput placeholder="Nickname" maxlength='30' formControlName="nickname">
     </mat-form-field>
 
     <mat-form-field class="name-left" appearance="outline">
@@ -30,13 +30,14 @@
 
     <mat-form-field class="name-left" appearance="outline">
       <mat-label>Year Joined</mat-label>
-      <input matInput placeholder="Last" formControlName="yearJoined" required>
+      <input matInput placeholder="Year" formControlName="yearJoined" required>
     </mat-form-field>
 
     <mat-form-field class="name-right" appearance="outline">
       <mat-label>Graduation Year</mat-label>
-      <input matInput placeholder="Last" formControlName="graduation" required>
+      <input matInput placeholder="Year" formControlName="graduationYear" required>
     </mat-form-field>
+
     <mat-form-field class="name-left" appearance="outline">
       <mat-label>Birthday</mat-label>
       <input matInput [matDatepicker]="picker" placeholder="Birthday" formControlName="birthday" required>
@@ -52,6 +53,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <p class='name-left warning-text'>Note: We do not store your pin directly</p>
+    <mat-form-field class="name-left" appearance="outline">
+        <mat-label>New PIN</mat-label>
+        <input matInput type='text' pattern="\d*" maxlength="4" placeholder="New PIN" formControlName="pin">
+        <mat-error *ngIf='editForm.controls.pin.hasError("maxlength") || editForm.controls.pin.hasError("pattern")'>PIN must be 4 digits long</mat-error>
+      </mat-form-field>
 
   </form>
   <div class="action-button-container">

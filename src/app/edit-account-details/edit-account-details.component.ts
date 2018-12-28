@@ -71,10 +71,11 @@ export class EditAccountDetailsComponent implements OnInit {
       'first': new FormControl(this.user.firstName),
       'last': new FormControl(this.user.lastName),
       'birthday': new FormControl(this.user.birthday),
-      'graduation': new FormControl(this.user.graduationYear, { validators: Validators.min(this.thisYear) }),
+      'graduationYear': new FormControl(this.user.graduationYear, { validators: Validators.min(this.thisYear) }),
       'yearJoined': new FormControl(this.user.yearJoined),
       'nickname': new FormControl(this.user.nickname, Validators.maxLength(30)),
-      'roleid': new FormControl(this.user.role)
+      'roleid': new FormControl(this.user.role),
+      'pin': new FormControl('', {validators: [Validators.minLength(4), Validators.maxLength(4), Validators.pattern(/\d*/)]})
     });
 
     this.editForm.controls.email.disable();
@@ -84,7 +85,7 @@ export class EditAccountDetailsComponent implements OnInit {
 
 
     if (this.user.graduationYear != null) {
-      this.editForm.controls.graduation.disable();
+      this.editForm.controls.graduationYear.disable();
     }
 
     if (this.user.yearJoined != null) {
@@ -101,6 +102,11 @@ export class EditAccountDetailsComponent implements OnInit {
   }
 
   save() {
+
+    if(this.editForm.invalid) {
+      this.message = 'One of the fields is invalid. Please fix before submitting';
+      return;
+    }
 
     let params: any = {};
 
