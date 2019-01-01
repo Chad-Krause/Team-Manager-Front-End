@@ -8,9 +8,24 @@
 
 .page {
     margin-top: 64px;
+    height: calc(100vh - 64px);
 }
 
 .gearhead-title {
     padding: 5px;
     height: 85%;
+}
+
+.drawer-icon {
+    color: white;
+}
+
+.sidenav {
+    padding-top: 68px;
+  }
+
+.list-button {
+    padding: 0;
+    text-align: left;
+    width: 100%;
 }

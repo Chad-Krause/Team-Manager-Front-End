@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { ApiService } from './api.service';
 import { globals } from 'src/environments/globals';
 import { User, Roles } from '../models/user';
@@ -13,11 +13,11 @@ import { LoginResult } from '../models/login-result';
 export class AuthService {
 
   user: User;
+  loginChanged: EventEmitter<null> = new EventEmitter<null>();
 
   constructor(private api: ApiService, private router: Router) { }
 
   login(email: string, password: string): Observable<LoginResult> {
-
     return new Observable(res => {
       let loginResult: LoginResult = new LoginResult();
 
@@ -29,11 +29,13 @@ export class AuthService {
             localStorage.setItem(globals.LS_USER, JSON.stringify(this.user));
             this.router.navigateByUrl('account-info');
             loginResult.success = true;
-            res.next(loginResult)
+            res.next(loginResult);
+            this.loginChanged.emit();
           } else {
             loginResult.success = false;
             loginResult.errorMsg = token.errors[0].title;
             res.next(loginResult);
+            this.loginChanged.emit();
           }
         }
       );
@@ -47,6 +49,7 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem(globals.LS_JWT);
     localStorage.removeItem(globals.LS_USER);
+    this.loginChanged.emit();
   }
 
   getJWT(): string {

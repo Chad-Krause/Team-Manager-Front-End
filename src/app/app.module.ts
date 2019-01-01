@@ -8,7 +8,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatButtonModule } from "@angular/material/button";
-import { MatRippleModule, MatInputModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatOptionModule, MatSelectModule, MatTableModule, MatMenuModule, MatProgressBarModule, MatTabsModule } from '@angular/material';
+import { MatRippleModule, MatInputModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatOptionModule, MatSelectModule, MatTableModule, MatMenuModule, MatProgressBarModule, MatTabsModule, MatSidenavModule } from '@angular/material';
 
 import 'hammerjs'
 
@@ -71,6 +71,7 @@ import { UserListItemComponent } from './sub/user-list-item/user-list-item.compo
     MatButtonModule,
     MatProgressBarModule,
     MatTabsModule,
+    MatSidenavModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

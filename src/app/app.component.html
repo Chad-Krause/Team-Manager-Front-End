@@ -1,4 +1,9 @@
 <mat-toolbar class="toolbar" color="primary">
+  <button *ngIf='links.length' mat-icon (click)='opened = !opened' class='drawer-icon'>
+    <mat-icon *ngIf='!opened'>menu</mat-icon>
+    <mat-icon *ngIf='opened'>arrow_back</mat-icon>
+  </button>
+
   <img class="gearhead-title" src='./assets/gearhead.svg' [routerLink]="[ '/account-info']">
   <span [routerLink]="[ '/account-info']">{{title}}</span>
   <span class="menu-spacer"></span>
@@ -8,21 +13,37 @@
 </mat-toolbar>
 
 <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="[ '/account-info']" [disabled]='!isLoggedIn()'>
-      <mat-icon>person</mat-icon>
-      <span>My Account</span>
-    </button>
-    <button mat-menu-item (click)='logout()' [disabled]='!isLoggedIn()'>
-      <mat-icon>power_settings_new</mat-icon>
-      <span>Logout</span>
-    </button>
-  </mat-menu>
+  <button mat-menu-item [routerLink]="[ '/account-info']" [disabled]='!isLoggedIn()'>
+    <mat-icon>person</mat-icon>
+    <span>My Account</span>
+  </button>
+  <button mat-menu-item (click)='logout()' [disabled]='!isLoggedIn()'>
+    <mat-icon>power_settings_new</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>
 
-<div class="mdl-grid page">
-  <div class="mdl-cell mdl-cell--2-col-desktop"></div>
-  <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-    <!-- 12 Desktop, 8 Tablet, 4 Mobile -->
-    <router-outlet></router-outlet>
-  </div>
-  <div class="mdl-cell mdl-cell--2-col-desktop"></div>
-</div>
+
+<mat-drawer-container class="" [hasBackdrop]="true">
+
+  <mat-drawer #drawer class='sidenav' [(opened)]="opened">
+    <mat-list role="list" *ngFor='let link of links'>
+      <button mat-button class='list-button' (click)='navigate(link.url)' [disabled]='link.disabled'>
+        <mat-list-item role="listitem">
+          <mat-icon mat-list-icon>{{link.icon}}</mat-icon>
+          <h3 mat-line>{{link.name}}</h3>
+        </mat-list-item>
+      </button>
+    </mat-list>
+  </mat-drawer>
+
+
+  <mat-drawer-content>
+    <div class="mdl-grid page">
+      <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-col-phone mdl-cell--2-offset-desktop">
+        <!-- 12 Desktop, 8 Tablet, 4 Mobile -->
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

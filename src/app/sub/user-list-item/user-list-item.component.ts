@@ -41,11 +41,11 @@ export class UserListItemComponent implements OnInit {
   }
 
   accountDetails() {
-    this.router.navigateByUrl('/a')
+    this.router.navigateByUrl(`/account-info/${this.user.id}`)
   }
 
   editUser() {
-
+    this.router.navigateByUrl(`/edit-account-info/${this.user.id}`)
   }
   
 }
