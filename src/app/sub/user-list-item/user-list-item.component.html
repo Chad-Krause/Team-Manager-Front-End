@@ -1,0 +1,55 @@
+<div class="details mdl-grid">
+  <div class='mdl-cell mdl-cell--3-col mdl-cell--1-col-phone mdl-cell--2-col-tablet'>
+    <img src='{{user.getProfilePicture() | secure | async}}' class='user-card-image'>
+  </div>
+
+  <div class='text-details mdl-cell mdl-cell--6-col mdl-cell--5-col-tablet'>
+    <h4 class='name'>{{user.firstName}} {{user.lastName}}</h4>
+    <p *ngIf='user.nickname' class='user-details'><strong>Nickname: </strong> {{user.nickname}}</p>
+    <p class='user-details'><strong>Email: </strong> {{user.email}}</p>
+    <p class='user-details'><strong>Created: </strong>{{user.date_added | date:'short'}}</p>
+  </div>
+
+  <!--<div class='mdl-cell mdl-cell--3-col mdl-cell--4-col-phone'>
+    <div class='mdl-cell--2-col-phone'>
+      <button class='btn' mat-raised-button color='primary'>Confirm</button></div>
+    <div class='mdl-cell--2-col-phone'>
+      <button class='btn' mat-raised-button color='warn'>Block</button>
+    </div>
+  </div>-->
+
+  <div *ngIf='type == 1' class='confirm-deny-buttons mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet'>
+    <button class='menu-button' mat-icon-button [matMenuTriggerFor]="confirmdeny">
+      <mat-icon class='big-icon'>more_vert</mat-icon>
+    </button>
+  </div>
+
+  <div *ngIf='type == 2' class='confirm-deny-buttons mdl-cell mdl-cell--3-col mdl-cell--1-col-tablet'>
+      <button class='menu-button' mat-icon-button [matMenuTriggerFor]="normalMenu">
+        <mat-icon class='big-icon'>more_vert</mat-icon>
+      </button>
+    </div>
+</div>
+
+
+<mat-menu #confirmdeny="matMenu">
+    <button mat-menu-item (click)='confirmUser()'>
+      <mat-icon>check</mat-icon>
+      <span>Confirm</span>
+    </button>
+    <button mat-menu-item (click)='disableUser()'>
+      <mat-icon>close</mat-icon>
+      <span>Deny</span>
+    </button>
+  </mat-menu>
+
+  <mat-menu #normalMenu="matMenu">
+      <button mat-menu-item (click)='accountDetails()'>
+        <mat-icon>person</mat-icon>
+        <span>View</span>
+      </button>
+      <button mat-menu-item (click)='editUser()'>
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+    </mat-menu>

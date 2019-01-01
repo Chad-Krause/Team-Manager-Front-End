@@ -1,0 +1,16 @@
+.filter {
+    width: 400px;
+    margin: 10px auto 0;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.mat-form-field-infix {
+    width: 100%
+}
+
+.tab-space {
+    margin-top: 10px
+}

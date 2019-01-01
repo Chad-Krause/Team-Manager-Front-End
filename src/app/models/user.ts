@@ -1,3 +1,5 @@
+import { environment } from "src/environments/environment";
+
 export class User {
     id: number;
     firstName: string;
@@ -10,6 +12,9 @@ export class User {
     yearJoined: number | null;
     confirmed: boolean;
     profilePictureUrl: string;
+    profilePictureId: number;
+    date_added?: Date;
+    date_modified?: Date;
 
     constructor(response: any) {
         this.id = +response.id;
@@ -23,6 +28,16 @@ export class User {
         this.yearJoined = response.yearJoined ? +response.yearJoined : null;
         this.confirmed = response.confirmed;
         this.profilePictureUrl = response.profilePictureUrl;
+        this.profilePictureId = response.profilePictureId;
+
+        if(response.date_added) {
+            this.date_added = new Date(response.date_added);
+        }
+
+        if(response.date_modified) {
+            this.date_modified = new Date(response.date_modified);
+        }
+
     }
 
     getName(): string {
@@ -30,7 +45,8 @@ export class User {
     }
 
     getProfilePicture(): string {
-        return this.profilePictureUrl ? this.profilePictureUrl : 'assets/missing_profile.png'
+        let url = environment.baseUrl + `image/${this.profilePictureId}`;
+        return this.profilePictureId !== 0 ? url : 'assets/missing_profile.png'
     }
 
     getRole(): string {

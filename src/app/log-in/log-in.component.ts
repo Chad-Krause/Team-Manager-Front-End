@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { LoginResult } from '../models/login-result';
 
 @Component({
   selector: 'app-landing-page',
@@ -31,13 +32,13 @@ export class LoginPageComponent {
   }
 
   login() {
-    let success: Observable<boolean> = this.auth.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
+    let success: Observable<LoginResult> = this.auth.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value);
 
     success.subscribe(res => {
-      if(!res) {
-        this.message = 'Login failed! Email or password is invalid!';
+      if(!res.success) {
+        this.message = `Login failed! ${res.errorMsg}`;
       }
-    })
+    });
   }
 
 }

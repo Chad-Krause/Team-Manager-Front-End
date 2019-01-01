@@ -34,6 +34,7 @@ export class EditAccountDetailsComponent implements OnInit {
   imgMessage: string = '';
   imgUrl: string = '/assets/missing_profile.png';
   imgId: number = 0;
+  self: boolean = true;
 
   @ViewChild('file') file;
 
@@ -45,8 +46,11 @@ export class EditAccountDetailsComponent implements OnInit {
     public tidbitDialog: MatDialog
   ) {
     let id = this.route.snapshot.params.id;
+    this.self = false;
+
     if (id === undefined) {
       id = this.auth.getUser().id;
+      this.self = true;
     }
 
     this.api.getUser(id).subscribe(
@@ -123,7 +127,11 @@ export class EditAccountDetailsComponent implements OnInit {
     this.api.saveUser(this.user.id, params).subscribe(
       result => {
         if (result.success) {
-          this.router.navigate(['account-info']);
+          if(this.self) {
+            this.router.navigateByUrl('/account-info');
+          } else {
+            this.router.navigateByUrl(`/account-info/${this.user.id}`);
+          }
         } else {
           this.message = "Failed to update. This could happen if no information changed.";
         }

@@ -5,6 +5,7 @@ import { User, Roles } from '../models/user';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
+import { LoginResult } from '../models/login-result';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,11 @@ export class AuthService {
 
   constructor(private api: ApiService, private router: Router) { }
 
-  login(email: string, password: string): Observable<boolean> {
+  login(email: string, password: string): Observable<LoginResult> {
 
     return new Observable(res => {
+      let loginResult: LoginResult = new LoginResult();
+
       this.api.login(email, password).subscribe(
         token => {
           if(token.success) {
@@ -25,9 +28,12 @@ export class AuthService {
             localStorage.setItem(globals.LS_JWT, token.data.token);
             localStorage.setItem(globals.LS_USER, JSON.stringify(this.user));
             this.router.navigateByUrl('account-info');
-            res.next(true)
+            loginResult.success = true;
+            res.next(loginResult)
           } else {
-            res.next(false);
+            loginResult.success = false;
+            loginResult.errorMsg = token.errors[0].title;
+            res.next(loginResult);
           }
         }
       );

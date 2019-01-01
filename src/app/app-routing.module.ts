@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'reset-password', component: PasswordResetComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'account-info', component: AccountInfoComponent, canActivate: [AuthGuard]},
+  { path: 'account-info/:id', component: AccountInfoComponent, canActivate: [AuthGuard, AdminGuard]},
   { path: 'edit-account-info/:id', component: EditAccountDetailsComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: 'edit-account-info', component: EditAccountDetailsComponent, canActivate: [AuthGuard] },
   { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard, AdminGuard]},

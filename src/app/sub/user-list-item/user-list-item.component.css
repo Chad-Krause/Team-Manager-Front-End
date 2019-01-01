@@ -1,0 +1,44 @@
+.user-card-image {
+    border-radius: 20px;
+    display: block;
+    width: 100%;
+}
+
+.details {
+    padding-top: 0;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    background: white;
+    margin-bottom: 10px;
+    max-width: 600px;
+}
+
+.btn {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.name {
+    margin: 0;
+}
+
+.user-details {
+    margin-bottom: 0
+}
+
+.big-icon {
+    font-size: 28px;
+}
+
+.menu-button {
+    float: right;
+}
+
+@media (max-width: 479px) {
+    .text-details {
+        width: calc(65% - 16px)
+    }
+
+    .confirm-deny-buttons {
+        width: calc(10% - 16px);
+    }
+}

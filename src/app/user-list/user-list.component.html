@@ -1,3 +1,17 @@
-<p>
-  user-list works!
-</p>
+<mat-tab-group>
+    <mat-tab label="Users">
+        <div class='filter'>
+            <mat-form-field class='full-width'>
+                <input class='' type='text' [(formControl)]='query' matInput placeholder="Filter Users">
+            </mat-form-field>
+        </div>
+        <div *ngIf='filteredUsers'>
+            <user-list-item *ngFor='let filteredUser of filteredUsers' [user]='filteredUser' (refresh)='refreshUsers()' [type]='2'></user-list-item>
+        </div>
+    </mat-tab>
+    <mat-tab label="Confirm/Deny">
+        <div *ngIf='unconfirmedUsers' class='tab-space'>
+            <user-list-item *ngFor='let unconfirmedUser of unconfirmedUsers' [user]='unconfirmedUser' (refresh)='refreshUsers()' [type]='1'></user-list-item>
+        </div>
+    </mat-tab>
+</mat-tab-group>

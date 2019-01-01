@@ -80,4 +80,16 @@ export class ApiService {
       { reportProgress: true });
     return this.http.request(request);
   }
+
+  getAllUsers(): Observable<ApiResponse<User[]>> {
+    return this.http.get<ApiResponse<User[]>>(environment.baseUrl + 'user/getAllUsers');
+  }
+
+  confirmUser(userid: number): Observable<ApiResponse<any>> {
+    return this.http.post<ApiResponse<any>>(environment.baseUrl + 'user/confirmUser', {userid: userid.toString()});
+  }
+
+  disableUser(userid: number): Observable<ApiResponse<any>> {
+    return this.http.post<ApiResponse<any>>(environment.baseUrl + 'user/disableUser', {userid: userid.toString()});
+  }
 }

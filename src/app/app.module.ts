@@ -8,7 +8,7 @@ import { MatListModule } from "@angular/material/list";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatGridListModule } from "@angular/material/grid-list";
 import { MatButtonModule } from "@angular/material/button";
-import { MatRippleModule, MatInputModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatOptionModule, MatSelectModule, MatTableModule, MatMenuModule, MatProgressBarModule } from '@angular/material';
+import { MatRippleModule, MatInputModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatProgressSpinnerModule, MatOptionModule, MatSelectModule, MatTableModule, MatMenuModule, MatProgressBarModule, MatTabsModule } from '@angular/material';
 
 import 'hammerjs'
 
@@ -30,6 +30,7 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 import { TidbitDialogComponent } from './modals/tidbit-dialog/tidbit-dialog.component';
 import { SafeHtmlPipe } from './directives/safe-html.pipe';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserListItemComponent } from './sub/user-list-item/user-list-item.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { UserListComponent } from './user-list/user-list.component';
     SecurePipe,
     TidbitDialogComponent,
     SafeHtmlPipe,
-    UserListComponent
+    UserListComponent,
+    UserListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,7 @@ import { UserListComponent } from './user-list/user-list.component';
     MatMenuModule,
     MatButtonModule,
     MatProgressBarModule,
+    MatTabsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
